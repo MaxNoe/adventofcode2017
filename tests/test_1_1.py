@@ -1,5 +1,5 @@
 def test_1():
-    from adventofcode.day1 import solve_captcha
+    from adventofcode2017.day1 import solve_captcha
 
     numbers = [1, 1, 2, 2]
 
@@ -7,7 +7,7 @@ def test_1():
 
 
 def test_2():
-    from adventofcode.day1 import solve_captcha
+    from adventofcode2017.day1 import solve_captcha
 
     numbers = [1, 1, 1, 1]
 
@@ -15,7 +15,7 @@ def test_2():
 
 
 def test_3():
-    from adventofcode.day1 import solve_captcha
+    from adventofcode2017.day1 import solve_captcha
 
     numbers = [1, 2, 3, 4]
 
@@ -23,7 +23,7 @@ def test_3():
 
 
 def test_4():
-    from adventofcode.day1 import solve_captcha
+    from adventofcode2017.day1 import solve_captcha
 
     numbers = [9, 1, 2, 1, 2, 1, 2, 9]
 
