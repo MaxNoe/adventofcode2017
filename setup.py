@@ -8,4 +8,5 @@ setup(
     packages=find_packages(),
     tests_require=['pytest'],
     setup_requires=['pytest-runner'],
+    install_requires=['requests'],
 )
