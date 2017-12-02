@@ -11,7 +11,7 @@ def calc_checksum(spreadsheet):
 
 def parse_spreadsheet(text):
     return [
-        [int(cell) for cell in row]
+        [int(cell) for cell in row.split()]
         for row in text.splitlines()
     ]
 
