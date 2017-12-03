@@ -81,9 +81,55 @@ def manhattan_spiral(address):
     return manhattan(x, y)
 
 
+directions = (
+    (-1, 1), (0, 1), (1, 1),
+    (-1, 0), (1, 0),
+    (-1, -1), (0, -1), (1, -1)
+)
+
+
+def sum_initialisation(max_val):
+    ring = 0
+    pos = 0
+
+    x = 0
+    y = 0
+    current_val = 1
+
+    points = {(x, y): current_val}
+
+    while current_val < max_val:
+        if pos == max_address_ring(ring):
+            ring += 1
+
+        pos += 1
+
+        l = edge_length(ring)
+        min_addr = min_address_ring(ring)
+
+        if pos < min_addr + l - 2:
+            y += 1
+        elif pos < min_addr + 2 * l - 3:
+            x -= 1
+        elif pos < min_addr + 3 * l - 4:
+            y -= 1
+        else:
+            x += 1
+
+        current_val = 0
+        for dx, dy in directions:
+            current_val += points.get((x + dx, y + dy), 0)
+        points[(x, y)] = current_val
+
+    return current_val
+
+
 def main():
     address = int(get_input(3))
+
     print(manhattan_spiral(address))
+
+    print(sum_initialisation(address))
 
 
 if __name__ == '__main__':
