@@ -39,3 +39,11 @@ def test_jumps():
     do_step(position, instructions)
     assert position == 5, 'Wrong position after step 5'
     assert instructions[1] == 5, 'Wrong instruction set after step 5'
+
+
+def test_count_jumps():
+    from adventofcode2017.day5 import parse_input, count_jumps
+
+    instructions = parse_input(inp)
+
+    assert count_jumps(instructions) == 5
