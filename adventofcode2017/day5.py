@@ -1,33 +1,22 @@
 from . import get_input
 
+from .day5_ext import count_steps, do_step
+
+
+__all__ = ['count_steps', 'do_step']
+
 
 def parse_input(inp):
     return list(map(int, inp.split()))
 
 
-def do_step(position, instructions):
-    instructions = instructions.copy()
-
-    steps = instructions[position]
-    instructions[position] += 1
-    position += steps
-
-    return position, instructions
-
-
-def count_steps(instructions):
-    position = 0
-
-    steps = 0
-    while position < len(instructions):
-        position, instructions = do_step(position, instructions)
-        steps += 1
-    return steps
-
 
 def main():
     my_input = get_input(5)
     instructions = parse_input(my_input)
+
+    print('Puzzle 1: ', count_steps(instructions))
+    print('Puzzle 2: ', count_steps(instructions, puzzle2=True))
 
 
 if __name__ == '__main__':

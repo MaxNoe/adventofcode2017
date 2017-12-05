@@ -1,4 +1,5 @@
 from setuptools import setup, find_packages
+from Cython.Build import cythonize
 
 
 setup(
@@ -9,4 +10,5 @@ setup(
     tests_require=['pytest'],
     setup_requires=['pytest-runner'],
     install_requires=['requests'],
+    ext_modules=cythonize('adventofcode2017/day5_ext.pyx')
 )
