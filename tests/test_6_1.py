@@ -14,16 +14,16 @@ def test1():
     result = redistribute_blocks(nums)
     assert result == [2, 4, 1, 2]
 
-    result = redistribute_blocks(nums)
+    result = redistribute_blocks(result)
     assert result == [3, 1, 2, 3]
 
-    result = redistribute_blocks(nums)
+    result = redistribute_blocks(result)
     assert result == [0, 2, 3, 4]
 
-    result = redistribute_blocks(nums)
+    result = redistribute_blocks(result)
     assert result == [1, 3, 4, 1]
 
-    result = redistribute_blocks(nums)
+    result = redistribute_blocks(result)
     assert result == [2, 4, 1, 2]
 
 
