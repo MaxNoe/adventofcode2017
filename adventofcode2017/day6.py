@@ -1,5 +1,4 @@
 from . import get_input
-import math
 
 
 def parse_input(inp):
@@ -12,32 +11,34 @@ def redistribute_blocks(blocks):
     max_blocks = max(blocks)
     max_bank = blocks.index(max_blocks)
 
-    redistribute_blocks = math.ceil(max_blocks / n_banks)
-    n_last = max_blocks - redistribute_blocks * (n_banks - 1)
+    blocks[max_bank] = 0
 
-    for i in range(1, n_banks):
-        idx = (max_bank + i) % n_banks
-        blocks[idx] += max_blocks // (n_banks - 1)
+    idx = (max_bank + 1) % n_banks
 
-    blocks[max_bank] = n_last
+    while max_blocks > 0:
+        blocks[idx] += 1
+        max_blocks -= 1
+        idx = (idx + 1) % n_banks
 
     return blocks
 
 
 def count_cycles(memory_blocks):
-    states = set()
 
+    states = set()
     current_state = tuple(memory_blocks)
-    cycles = 0
+    cycle = 0
     while current_state not in states:
+
         states.add(current_state)
 
         memory_blocks = redistribute_blocks(memory_blocks)
+
         current_state = tuple(memory_blocks)
 
-        cycles += 1
+        cycle += 1
 
-    return cycles
+    return cycle
 
 
 def main():
