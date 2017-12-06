@@ -31,3 +31,9 @@ def test2():
     from adventofcode2017.day6 import count_cycles
 
     assert count_cycles(nums) == 5
+
+
+def test3():
+    from adventofcode2017.day6 import count_cycles
+
+    assert count_cycles(nums, return_loop_size=True) == (5, 4)
