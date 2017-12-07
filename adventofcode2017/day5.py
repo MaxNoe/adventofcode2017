@@ -1,14 +1,13 @@
 from . import get_input
 
-from .day5_ext import count_steps, do_step
+from .day5_ext import count_steps
 
 
-__all__ = ['count_steps', 'do_step']
+__all__ = ['count_steps']
 
 
 def parse_input(inp):
     return list(map(int, inp.split()))
-
 
 
 def main():

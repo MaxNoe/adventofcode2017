@@ -1,15 +1,17 @@
 from cpython cimport bool
+from cpython cimport array
+import array
 
-def do_step(int position, instructions):
+cdef do_step(int position, int[:] instructions):
     cdef int steps = instructions[position]
 
     instructions[position] += 1
     position += steps
 
-    return position, instructions
+    return position
 
 
-def do_step_2(int position, instructions):
+cdef do_step_2(int position, int[:] instructions):
     cdef int steps = instructions[position]
 
 
@@ -19,21 +21,22 @@ def do_step_2(int position, instructions):
         instructions[position] -= 1
     position += steps
 
-    return position, instructions
+    return position
 
 
-def count_steps(instructions, puzzle2=False):
+def count_steps(instructions, bool puzzle2=False):
     instructions = instructions.copy()
 
     cdef int position = 0
     cdef int steps = 0
     cdef int n_instructions = len(instructions)
+    cdef int[:] instruction_array = array.array('i', instructions)
 
     while position < n_instructions:
         if not puzzle2:
-            position, instructions = do_step(position, instructions)
+            position = do_step(position, instruction_array)
         else:
-            position, instructions = do_step_2(position, instructions)
+            position = do_step_2(position, instruction_array)
         steps += 1
     return steps
 
