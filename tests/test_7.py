@@ -1,5 +1,4 @@
-inp = '''
-pbga (66)
+inp = '''pbga (66)
 xhth (57)
 ebii (61)
 havc (66)
