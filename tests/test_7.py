@@ -15,7 +15,7 @@ cntj (57)
 
 from adventofcode2017.day7 import Program
 
-parsed = {
+programs = {
     'pbga': Program('pbga', 66, tuple()),
     'xhth': Program('xhth', 57, tuple()),
     'ebii': Program('ebii', 61, tuple()),
@@ -44,18 +44,32 @@ tree = {
 def test_parse_input():
     from adventofcode2017.day7 import parse_input
 
-    assert parse_input(inp) == parsed
+    assert parse_input(inp) == programs
 
 
 def test_find_root():
 
     from adventofcode2017.day7 import find_root
 
-    assert find_root(parsed).name == 'tknk'
+    assert find_root(programs).name == 'tknk'
 
 
 def test_build_tree():
 
     from adventofcode2017.day7 import build_tree
 
-    assert build_tree(parsed) == tree
+    assert build_tree(programs) == tree
+
+
+def test_tree_weight():
+    from adventofcode2017.day7 import calc_tree_weight
+
+    assert calc_tree_weight('ugml', tree['tknk']['ugml'], programs) == 251
+    assert calc_tree_weight('padx', tree['tknk']['padx'], programs) == 243
+    assert calc_tree_weight('fwft', tree['tknk']['fwft'], programs) == 243
+
+
+def test_find_wrong_weight():
+    from adventofcode2017.day7 import find_corrected_weight
+
+    assert find_corrected_weight(tree, programs) == 60
