@@ -1,4 +1,5 @@
 from . import get_input
+from collections import defaultdict
 
 
 def parse_input(inp):
@@ -23,14 +24,14 @@ def redistribute_blocks(blocks):
     return blocks
 
 
-def count_cycles(memory_blocks):
+def count_cycles(memory_blocks, return_loop_size=False):
 
-    states = set()
+    states = defaultdict(int)
     current_state = tuple(memory_blocks)
     cycle = 0
-    while current_state not in states:
 
-        states.add(current_state)
+    while current_state not in states:
+        states[current_state] = cycle
 
         memory_blocks = redistribute_blocks(memory_blocks)
 
@@ -38,14 +39,18 @@ def count_cycles(memory_blocks):
 
         cycle += 1
 
-    return cycle
+    if return_loop_size is False:
+        return cycle
+    return cycle, cycle - states[current_state]
 
 
 def main():
     inp = get_input(6)
     memory_blocks = parse_input(inp)
 
-    print('Task 1', count_cycles(memory_blocks))
+    cycles, loop_size = count_cycles(memory_blocks, return_loop_size=True)
+    print('Task 1: ', cycles)
+    print('Task 2: ', loop_size)
 
 
 if __name__ == '__main__':
