@@ -1,4 +1,5 @@
 from collections import defaultdict
+from adventofcode2017.day8 import Instruction, Condition
 
 
 inp = '''b inc 5 if a > 1
@@ -8,10 +9,10 @@ c inc -20 if c == 10
 '''
 
 parsed = [
-    ('b', 'inc', 5, ('a', '>', 1)),
-    ('a', 'inc', 1, ('b', '<', 5)),
-    ('c', 'dec', -10, ('a', '>=', 1)),
-    ('c', 'inc', -20, ('c', '==', 10)),
+    Instruction('b', 'inc', 5, Condition('a', '>', 1)),
+    Instruction('a', 'inc', 1, Condition('b', '<', 5)),
+    Instruction('c', 'dec', -10, Condition('a', '>=', 1)),
+    Instruction('c', 'inc', -20, Condition('c', '==', 10)),
 ]
 
 
