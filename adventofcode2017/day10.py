@@ -1,8 +1,38 @@
 from . import get_input
+from functools import reduce
+from operator import xor
 
 
 def parse_input(inp):
     return list(map(int, inp.split(',')))
+
+
+def input_to_lengths(inp):
+    return list(map(ord, inp))
+
+
+def elf_hash(inp):
+    lengths = input_to_lengths(inp) + [17, 31, 73, 47, 23]
+
+    index = 0
+    skip_size = 0
+    elements = list(range(256))
+    for _ in range(64):
+        for length in lengths:
+            index, skip_size = do_twist(elements, index, length, skip_size)
+    dense_hash = to_dense_hash(elements)
+    return to_hex_string(dense_hash)
+
+
+def to_dense_hash(elements):
+    return [
+        reduce(xor, elements[i * 16: (i + 1) * 16])
+        for i in range(16)
+    ]
+
+
+def to_hex_string(dense_hash):
+    return ''.join(map(lambda i: f'{i:02x}', dense_hash))
 
 
 def do_twist(elements, index, length, skip_size):
@@ -37,7 +67,7 @@ def main():
         index, skip_size = do_twist(elements, index, length, skip_size)
 
     print('Task 1', elements[0] * elements[1])
-
+    print('Task 2', elf_hash(inp))
 
 
 if __name__ == '__main__':

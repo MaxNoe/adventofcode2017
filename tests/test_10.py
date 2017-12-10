@@ -36,6 +36,12 @@ def test_do_twist():
     assert skip_size == 4
 
 
+def test_input_2():
+    from adventofcode2017.day10 import input_to_lengths
+
+    assert input_to_lengths('1,2,3') == [49, 44, 50, 44, 51]
+
+
 def test_hash():
     from adventofcode2017.day10 import elf_hash
 
