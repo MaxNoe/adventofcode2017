@@ -23,12 +23,29 @@ def find_group(root, pipes, group=None):
     return group
 
 
+def find_number_of_groups(pipes):
+    checked = set()
+    groups = 0
+    for i in range(len(pipes)):
+        if i in checked:
+            continue
+
+        groups += 1
+        group = find_group(i, pipes)
+        for p in group:
+            checked.add(p)
+
+    return groups
+
+
 def main():
     inp = get_input(12)
     pipes = parse_input(inp)
 
     group_zero = find_group(0, pipes)
     print('Task 1:', len(group_zero))
+
+    print('Task 2:', find_number_of_groups(pipes))
 
 
 if __name__ == "__main__":

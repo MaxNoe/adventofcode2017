@@ -28,3 +28,9 @@ def test_group():
     from adventofcode2017.day12 import find_group
 
     assert find_group(0, pipes) == {0, 2, 3, 4, 5, 6}
+
+
+def test_num_groups():
+    from adventofcode2017.day12 import find_number_of_groups
+
+    assert find_number_of_groups(pipes) == 2
