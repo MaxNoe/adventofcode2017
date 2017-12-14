@@ -1,4 +1,3 @@
-from collections import Counter
 from . import get_input
 
 
@@ -15,7 +14,7 @@ class CubePoint:
             abs(self.x - other.x)
             + abs(self.y - other.y)
             + abs(self.z - other.z)
-        ) / 2
+        ) // 2
 
     def __iadd__(self, other):
         self.x += other.x
@@ -31,7 +30,7 @@ class CubePoint:
         )
 
 
-directions = {
+DIRECTIONS = {
     'n': CubePoint(0, 1, -1),
     'ne': CubePoint(1, 0, -1),
     'se': CubePoint(1, -1, 0),
@@ -44,13 +43,19 @@ directions = {
 def main():
     inp = get_input(11)
 
-    c = Counter(inp.split(','))
     p = CubePoint(0, 0, 0)
+    origin = CubePoint(0, 0, 0)
+    directions = inp.split(',')
 
-    for direction, count in c.items():
-        p += directions[direction] * count
+    max_dist = 0
+    for direction in directions:
+        p += DIRECTIONS[direction]
+        d = p.distance(origin)
+        if d > max_dist:
+            max_dist = d
 
-    print('Task 1:', p.distance(CubePoint(0, 0, 0)))
+    print('Task 1:', p.distance(origin))
+    print('Task 2:', max_dist)
 
 
 if __name__ == '__main__':
