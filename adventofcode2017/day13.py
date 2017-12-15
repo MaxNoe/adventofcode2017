@@ -14,16 +14,42 @@ def zickzack(n):
 
 
 def init_firewall(layers):
-    return {
-        depth: zickzack(size)
+    firewall = {
+        depth: {'scanner': zickzack(size), 'size': size}
         for depth, size in layers.items()
     }
+    update_firewall(firewall)
+    return firewall
+
+
+def update_firewall(firewall):
+    for c in firewall.values():
+        c['current_pos'] = next(c['scanner'])
+
+
+def calc_severity(layers):
+    firewall = init_firewall(layers)
+
+    total_depth = max(layers.keys())
+    print(total_depth)
+
+    severity = 0
+    for depth in range(total_depth + 1):
+        print(depth, firewall.get(depth, {}).get('current_pos'))
+        if depth in firewall:
+            current_layer = firewall[depth]
+            if current_layer['current_pos'] == 0:
+                severity += depth * current_layer['size']
+        update_firewall(firewall)
+
+    return severity
 
 
 def main():
     inp = get_input(13)
     layers = parse_input(inp)
-    firewall = init_firewall(layers)
+
+    print('Task 1:', calc_severity(layers))
 
 
 if __name__ == "__main__":
