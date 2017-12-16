@@ -30,11 +30,7 @@ def swap_names(programs, n1, n2):
     swap_indices(programs, i1, i2)
 
 
-def main():
-    inp = get_input(16)
-    commands = parse_input(inp)
-    programs = list(string.ascii_lowercase[:16])
-
+def dance(programs, commands):
     for c, *args in commands:
         if c == 's':
             spin_programs(programs, *args)
@@ -42,7 +38,32 @@ def main():
             swap_names(programs, *args)
         elif c == 'x':
             swap_indices(programs, *args)
+
+
+def main():
+    inp = get_input(16)
+    commands = parse_input(inp)
+    programs = list(string.ascii_lowercase[:16])
+
+    print(''.join(programs))
+
+    known = [''.join(programs)]
+
+    dance(programs, commands)
     print('Task 1:', ''.join(programs))
+
+    known.append(''.join(programs))
+
+    for i in range(int(1e9)):
+        dance(programs, commands)
+        p = ''.join(programs)
+        if p in known:
+            break
+        known.append(p)
+
+    idx = int(1e9) % len(known)
+    print('Task 2:', known[idx])
+
 
 
 
