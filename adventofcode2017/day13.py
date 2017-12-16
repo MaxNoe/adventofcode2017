@@ -27,22 +27,38 @@ def update_firewall(firewall):
         c['current_pos'] = next(c['scanner'])
 
 
-def calc_severity(layers):
+def calc_severity(layers, delay=0, error=False):
     firewall = init_firewall(layers)
 
+    for i in range(delay):
+        update_firewall(firewall)
+
     total_depth = max(layers.keys())
-    print(total_depth)
 
     severity = 0
     for depth in range(total_depth + 1):
-        print(depth, firewall.get(depth, {}).get('current_pos'))
         if depth in firewall:
             current_layer = firewall[depth]
             if current_layer['current_pos'] == 0:
+                if error:
+                    raise ValueError('You got caught')
                 severity += depth * current_layer['size']
+
         update_firewall(firewall)
 
     return severity
+
+
+def calc_delay(layers):
+    delay = 0
+    while True:
+        try:
+            print(delay)
+            calc_severity(layers, delay=delay, error=True)
+            break
+        except ValueError:
+            delay += 1
+    return delay
 
 
 def main():
@@ -50,6 +66,7 @@ def main():
     layers = parse_input(inp)
 
     print('Task 1:', calc_severity(layers))
+    print('Task 2:', calc_delay(layers))
 
 
 if __name__ == "__main__":

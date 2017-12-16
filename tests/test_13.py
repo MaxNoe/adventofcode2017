@@ -36,3 +36,9 @@ def test_severity():
     from adventofcode2017.day13 import calc_severity
 
     assert calc_severity(layers) == 24
+
+
+def test_delay():
+    from adventofcode2017.day13 import calc_delay
+
+    assert calc_delay(layers) == 10
