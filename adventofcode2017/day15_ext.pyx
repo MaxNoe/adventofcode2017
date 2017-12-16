@@ -9,11 +9,28 @@ cdef int compare(int a, int b):
 
 def judge(int a, int b, int steps):
     cdef int n = 0
-
     cdef int i
     for i in range(steps):
         a = next_value(a, 16807)
         b = next_value(b, 48271)
+
+        n += compare(a, b)
+
+    return n
+
+
+def judge_2(int a, int b, int steps):
+    cdef int n = 0
+    cdef int i
+    for i in range(steps):
+
+        a = next_value(a, 16807)
+        while a % 4 != 0:
+            a = next_value(a, 16807)
+
+        b = next_value(b, 48271)
+        while b % 8 != 0:
+            b = next_value(b, 48271)
 
         n += compare(a, b)
 

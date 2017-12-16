@@ -51,13 +51,14 @@ def calc_severity(layers, delay=0, error=False):
 
 def calc_delay(layers):
     delay = 0
+    step_size = 1
     while True:
         try:
             print(delay)
             calc_severity(layers, delay=delay, error=True)
             break
         except ValueError:
-            delay += 1
+            delay += step_size
     return delay
 
 

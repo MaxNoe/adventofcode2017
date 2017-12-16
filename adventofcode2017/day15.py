@@ -1,7 +1,5 @@
 from . import get_input
-
-
-from .day15_ext import judge, next_value
+from .day15_ext import judge, next_value, judge_2
 
 
 def generator(f, seed):
@@ -19,6 +17,7 @@ def main():
     seed_b = int(lines[1].split()[-1])
 
     print('Task 1:', judge(seed_a, seed_b, int(40e6)))
+    print('Task 2:', judge_2(seed_a, seed_b, int(5e6)))
 
 
 if __name__ == "__main__":

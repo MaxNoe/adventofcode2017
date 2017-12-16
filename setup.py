@@ -10,5 +10,5 @@ setup(
     tests_require=['pytest'],
     setup_requires=['pytest-runner'],
     install_requires=['requests'],
-    ext_modules=cythonize('adventofcode2017/day5_ext.pyx')
+    ext_modules=cythonize('adventofcode2017/*.pyx'),
 )
