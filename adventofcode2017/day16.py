@@ -65,7 +65,5 @@ def main():
     print('Task 2:', known[idx])
 
 
-
-
 if __name__ == "__main__":
     main()

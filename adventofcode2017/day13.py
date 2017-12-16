@@ -9,56 +9,38 @@ def parse_input(inp):
     }
 
 
-def zickzack(n):
-    return cycle(list(range(n)) + list(range(n - 2, 0, -1)))
-
-
 def init_firewall(layers):
     firewall = {
-        depth: {'scanner': zickzack(size), 'size': size}
+        depth: {'period': 2 * (size - 1), 'size': size}
         for depth, size in layers.items()
     }
-    update_firewall(firewall)
     return firewall
 
 
-def update_firewall(firewall):
-    for c in firewall.values():
-        c['current_pos'] = next(c['scanner'])
-
-
-def calc_severity(layers, delay=0, error=False):
+def calc_severity(layers, delay=0):
     firewall = init_firewall(layers)
 
-    for i in range(delay):
-        update_firewall(firewall)
+    return sum(
+        depth * d['size']
+        for depth, d in firewall.items()
+        if (depth + delay) % d['period'] == 0
+    )
 
-    total_depth = max(layers.keys())
 
-    severity = 0
-    for depth in range(total_depth + 1):
-        if depth in firewall:
-            current_layer = firewall[depth]
-            if current_layer['current_pos'] == 0:
-                if error:
-                    raise ValueError('You got caught')
-                severity += depth * current_layer['size']
-
-        update_firewall(firewall)
-
-    return severity
+def check_caught(firewall, delay=0):
+    return any(
+        (depth + delay) % d['period'] == 0
+        for depth, d in firewall.items()
+    )
 
 
 def calc_delay(layers):
     delay = 0
-    step_size = 1
+    firewall = init_firewall(layers)
     while True:
-        try:
-            print(delay)
-            calc_severity(layers, delay=delay, error=True)
+        if not check_caught(firewall, delay):
             break
-        except ValueError:
-            delay += step_size
+        delay += 1
     return delay
 
 

@@ -20,18 +20,6 @@ def test_parse_input():
     assert parse_input(inp) == layers
 
 
-def test_zickzack():
-    from adventofcode2017.day13 import zickzack
-
-    z = zickzack(3)
-    assert next(z) == 0
-    assert next(z) == 1
-    assert next(z) == 2
-    assert next(z) == 1
-    assert next(z) == 0
-    assert next(z) == 1
-
-
 def test_severity():
     from adventofcode2017.day13 import calc_severity
 
