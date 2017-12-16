@@ -8,17 +8,20 @@ def generator(f, seed):
         yield value
 
 
+def compare(a, b):
+    # compare the lowest 16 bits
+    return ((a << 16) & 0xffffffff) == ((b << 16) & 0xffffffff)
+
+
 def judge(seed_a, seed_b, steps):
     n = 0
     gen_a = generator(16807, seed_a)
     gen_b = generator(48271, seed_b)
     for _ in range(steps):
-        a = '{:032b}'.format(next(gen_a))
-        b = '{:032b}'.format(next(gen_b))
-        n += a[-16:] == b[-16:]
+        a = next(gen_a)
+        b = next(gen_b)
+        n += compare(a, b)
     return n
-
-
 
 
 def main():
