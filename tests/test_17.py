@@ -11,6 +11,3 @@ def test_insertion():
     buf = build_ring_buffer(2018, 3)
     idx = buf.index(2017)
     assert buf[idx + 1] == 638
-
-
-
