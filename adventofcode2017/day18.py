@@ -5,6 +5,11 @@ from collections import defaultdict
 def parse_input(inp):
     def parse_line(line):
         inst, *args = line.split()
+        try:
+            args[0] = int(args[0])
+        except ValueError:
+            pass
+
         if len(args) == 2:
             try:
                 args[1] = int(args[1])
@@ -21,6 +26,7 @@ def get_first_recovered_freq(instructions):
 
     while 0 <= pos < len(instructions):
         instruction, args = instructions[pos]
+        args = args.copy()
 
         if len(args) > 1 and isinstance(args[1], str):
             args[1] = registers[args[1]]
@@ -39,8 +45,11 @@ def get_first_recovered_freq(instructions):
             if registers[args[0]] != 0:
                 break
 
-        if instruction == 'jgz' and registers[args[0]] > 0:
-                pos += args[1]
+        if isinstance(args[0], str):
+            args[0] = registers[args[0]]
+
+        if instruction == 'jgz' and args[0] > 0:
+            pos += args[1]
         else:
             pos += 1
 
