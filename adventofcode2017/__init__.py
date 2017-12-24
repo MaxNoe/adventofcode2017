@@ -12,4 +12,4 @@ def get_input(day):
     r = requests.get(url.format(day), cookies={'session': session})
     r.raise_for_status()
 
-    return r.text.strip()
+    return r.text
