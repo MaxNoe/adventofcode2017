@@ -8,6 +8,12 @@ def test_letters():
     assert find_letters(inp.splitlines()) == 'ABCDEF'
 
 
+def test_count_steps():
+    from adventofcode2017.day19 import count_steps
+
+    assert count_steps(inp.splitlines()) == 38
+
+
 def test_find_entry():
     from adventofcode2017.day19 import find_entry
     diagram = inp.splitlines()

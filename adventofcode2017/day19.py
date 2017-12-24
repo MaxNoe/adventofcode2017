@@ -36,10 +36,23 @@ def find_letters(diagram):
     return letters[:-1]
 
 
+def count_steps(diagram):
+    pos = find_entry(diagram)
+
+    pos, direction = next_step(diagram, pos)
+    steps = 1
+
+    while direction is not None:
+        pos, direction = next_step(diagram, pos, direction)
+        steps += 1
+    return steps
+
+
 def main():
     inp = get_input(19)
     diagram = inp.splitlines()
     print('Task 1:', find_letters(diagram))
+    print('Task 2:', count_steps(diagram))
 
 
 if __name__ == "__main__":
