@@ -88,6 +88,10 @@ def main():
 
     print('Task 1:', sum(c == '#' for r in img for c in r))
 
+    for i in range(13):
+        img = enhance(img, rules)
+    print('Task 2:', sum(c == '#' for r in img for c in r))
+
 
 if __name__ == "__main__":
     main()
