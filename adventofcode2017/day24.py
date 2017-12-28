@@ -8,6 +8,9 @@ def main():
     best_bridge = find_best_bridge(bridges)
     print('Task 1:', calc_strength(best_bridge))
 
+    longest_bridge = find_longest_bridge(bridges)
+    print('Task 2:', calc_strength(longest_bridge))
+
 
 def parse_input(inp):
     return list(map(
@@ -18,6 +21,10 @@ def parse_input(inp):
 
 def calc_strength(bridge):
     return sum(map(sum, bridge))
+
+
+def find_longest_bridge(bridges):
+    return sorted(bridges, key=lambda b: (len(b), calc_strength(b)))[-1]
 
 
 def build_bridges(components, open_connection=0):

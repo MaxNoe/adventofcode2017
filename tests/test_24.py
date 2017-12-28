@@ -60,3 +60,11 @@ def test_best_bridge():
     bridges = build_bridges(components)
     assert find_best_bridge(bridges) == [(0, 1), (10, 1), (9, 10)]
     assert calc_strength(find_best_bridge(bridges)) == 31
+
+
+def test_longest():
+    from adventofcode2017.day24 import find_longest_bridge, calc_strength, build_bridges
+
+    bridges = build_bridges(components)
+    assert find_longest_bridge(bridges) == [(0, 2), (2, 2), (2, 3), (3, 5)]
+    assert calc_strength(find_longest_bridge(bridges)) == 19
